@@ -4,9 +4,11 @@ import {MdPersonSearch} from 'react-icons/md'
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ClientBody (){
+    const navigate = useNavigate()
     const [selectedDate, setSelectedDate] = useState(new Date());
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -16,7 +18,8 @@ export default function ClientBody (){
                 <ClientPanel>
                     <ClientBoxArea>
                         <h1>Menu</h1>
-                        <BiUserPlus style={{
+                        <BiUserPlus onClick={()=>{navigate('/register')}} style={{
+                            hover: "hand", 
                             width:"150px",
                             height:"150px",
                             color:"#000",
@@ -131,8 +134,10 @@ const ListClientsArea = styled.div `
 
 const ListClientsBox = styled.div`
         border: 3px grey solid;
+        width:60%;
         margin-top:18px;
         border-radius: 5px;
+        align-items:center;
         background-color:#ebebeb;
         p{
         color:black;
