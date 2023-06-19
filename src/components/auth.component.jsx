@@ -1,10 +1,12 @@
 import { Form } from 'react-router-dom'
 import styled from 'styled-components'
-import { Navigate } from 'react-router-dom'
-
-import foto1 from '../assets/momAfflatus.jpg'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginBody(){
+    const navigate = useNavigate()
+    const login = ()=>{
+        navigate('/client')
+    }
 
     return(
         <PageContainer>
@@ -14,7 +16,7 @@ export default function LoginBody(){
                                 <form>
                                     <StyledInput1 placeholder='usuario' type='text' required ></StyledInput1>
                                     <StyledInput1 placeholder='senha' type= 'password' required></StyledInput1>
-                                    <button type='submit'onClick={()=>{alert("clicado")}}> Log In</button>
+                                    <button type='submit'onClick={()=>{login()}}> Log In</button>
                                 </form>
                         </LoginPanel>
                         <h1> Assistant </h1>
@@ -57,7 +59,7 @@ const LoginPanel = styled.div`
 
 `
 const StyledInput1= styled.input`
-    
+
     margin-top:30px;
     width:300px;
     height:60px;
