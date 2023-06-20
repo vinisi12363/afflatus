@@ -13,6 +13,7 @@ export default function ClientBody (){
     const handleDateChange = (date) => {
         setSelectedDate(date);
       };
+      console.log(selectedDate)
     return (
 
                 <ClientPanel>
@@ -24,20 +25,24 @@ export default function ClientBody (){
                             height:"150px",
                             color:"#000",
                         }}/>
-                        <h2>Cadastrar</h2>
+                       
 
-                        <MdPersonSearch style={{
+                        <MdPersonSearch  onClick={()=>{navigate('/search')}} style={{
                             width:"150px",
                             height:"150px",
                             color:"#000",
                         }}/>
-                        <h2>Procurar</h2>
+                         <CalendarBox>
+                    
+                             <Calendar onChange={handleDateChange} value={selectedDate} />
+                         </CalendarBox>
 
                     </ClientBoxArea>
-                    <Calendar onChange={handleDateChange} value={selectedDate} />
+                  
                    
+                     
                    <ListClientsArea>
-                   
+                        <h1>Lembretes</h1>
                      <ListClientsBox>
                                 <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
                                    <p>  Aniversário: 01/01 </p>
@@ -99,7 +104,15 @@ export default function ClientBody (){
 
 }
 
+const CalendarBox = styled.div`
+    height:29dvh;
+    border-radius:5px;
+    width:80%;
+    margin-top:20px;
+    border:3px black solid;
 
+
+`
 const ClientPanel = styled.div`
         display:flex;
         flex-direction:row;
@@ -113,7 +126,7 @@ const ClientBoxArea = styled.div`
     align-items:center;
     display : flex;
     flex-direction: column;
-    height:80dvh;
+    height:100dvh;
     width:400px;
     background-color:sandybrown;
 
