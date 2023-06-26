@@ -25,7 +25,6 @@ export default function LoginBody(){
     }
 
     const handleChange1 =(e)=>{
-       
         setPassword(e.target.value)
     }
     return(

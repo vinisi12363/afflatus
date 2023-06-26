@@ -2,31 +2,84 @@ import Calendar from "react-calendar"
 import styled from "styled-components"
 import  Typography  from "@mui/material/Typography"
 import {BsPlusSquare} from 'react-icons/bs'
-
+import { useState } from "react"
 export default function RegisterComponent(){
-    
 
-   
+    const [nomeMae , setNomeMae] = useState("")
+    const [nascMae , setNascMae] = useState("")
+    const [numeroMae , setNumeroMae] = useState("")
+
+    const [nomePai , setNomePai] = useState("")
+    const [nascPai , setNascPai] = useState("")
+    const [numeroPai , setNumeroPai] = useState("")
+    
+    
+    const [nomeBebe , setNomeBebe] = useState("")
+    const [nascBebe , setNascBebe] = useState("")
+
+    const [specialDateText, setSpecialDateText] = useState("")
+    const [specialDate, setSpecialDate] = useState("")
+
+
+    let ObjCadastro= {}
+
+  
+    const cadastrar=(e)=>{
+        e.preventDefault();
+       
+        if(specialDateText.length==0){
+            ObjCadastro= {
+                nomeMae:nomeMae,
+                nascMae:nascMae,
+                numeroMae:numeroMae,
+                nomePai:nomePai,
+                nascPai:nascPai,
+                numeroPai:numeroPai,
+                nomeBebe:nomeBebe,
+                nascBebe:nascBebe  
+            }
+        
+        } else {
+            ObjCadastro= {
+                nomeMae:nomeMae,
+                nascMae:nascMae,
+                numeroMae:numeroMae,
+                nomePai:nomePai,
+                nascPai:nascPai,
+                numeroPai:numeroPai,
+                nomeBebe:nomeBebe,
+                nascBebe:nascBebe, 
+                specialDateText:specialDateText,
+                specialDate:specialDate
+            }
+
+        }
+          
+     
+
+        console.log("objeto cadastrado", ObjCadastro)
+    }
+
     return(
         <RegisterPanel>
             <Typography variant='h1'> Formulário de cadastro </Typography>
             <RegisterBox>
-            <form>
-                
-                <StyledInput1 type="text" placeholder="Nome da mamãe"/>
-                <BirthDateInput type="date"></BirthDateInput>
-                <PhoneeInput  placeholder='WhatsApp'type="tel"></PhoneeInput>
+            <form onSubmit={(e)=>cadastrar(e) }>
 
-                <StyledInput1 placeholder="Nome do papai ou responsável"/>
-                <BirthDateInput type="date"></BirthDateInput>
-                <PhoneeInput placeholder='WhatsApp' type="tel"></PhoneeInput>
+                <StyledInput1 required onChange={e=>setNomeMae(e.target.value)} value={nomeMae}type="text" placeholder="Nome da mamãe"/>
+                <BirthDateInput required onChange={e=>setNascMae(e.target.value)} value={nascMae} type="date"></BirthDateInput>
+                <PhoneeInput  required onChange={e=>setNumeroMae(e.target.value)} value={numeroMae} placeholder='WhatsApp'type="tel"></PhoneeInput>
 
-                <StyledInput1 placeholder="Nome do bebê"/>
-                <BirthDateInput type="date"></BirthDateInput>
+                <StyledInput1 required onChange={e=>setNomePai(e.target.value)} value={nomePai} placeholder="Nome do papai ou responsável"/>
+                <BirthDateInput required onChange={e=>setNascPai(e.target.value)} value={nascPai} type="date"></BirthDateInput>
+                <PhoneeInput required onChange={e=>setNumeroPai(e.target.value)} value={numeroPai} placeholder='WhatsApp' type="tel"></PhoneeInput>
 
-                
-                <StyledInput1 placeholder="Data especial (Batismo, primeiros passos etc)"/>
-                <BirthDateInput type="date"></BirthDateInput>
+                <StyledInput1 required onChange={e=>setNomeBebe(e.target.value)} value={nomeBebe} placeholder="Nome do bebê"/>
+                <BirthDateInput  required onChange={e=>setNascBebe(e.target.value)} value={nascBebe} type="date"></BirthDateInput>
+
+
+                <StyledInput1  onChange={e=> setSpecialDateText(e.target.value)} placeholder="Data especial (Batismo, primeiros passos etc)"/>
+                <BirthDateInput   onChange={e=> setSpecialDate(e.target.value)} type="date"></BirthDateInput>
                 
                 <button type="submit">Cadastrar</button>
             </form>
