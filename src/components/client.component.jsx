@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 
 
 export default function ClientBody (){
@@ -50,7 +51,7 @@ export default function ClientBody (){
                                     <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
                                     
                      </ListClientsBox>
-                           
+                     <Card variant="outlined"> 
                      <ListClientsBox>
                                 <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
                                    <p>  Aniversário: 01/01 </p>
@@ -58,7 +59,7 @@ export default function ClientBody (){
                                     <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
                                     
                      </ListClientsBox>
-                       
+                       </Card>
                            
                      <ListClientsBox>
                                 <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
@@ -105,7 +106,7 @@ export default function ClientBody (){
 }
 
 const CalendarBox = styled.div`
-    height:29dvh;
+    
     border-radius:5px;
     width:80%;
     margin-top:20px;

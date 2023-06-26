@@ -1,22 +1,62 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import * as React from 'react';
+import { useState } from 'react';
+import e from 'cors';
 
 export default function LoginBody(){
+    const [open, setOpen] = useState(false)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate()
-    const login = ()=>{
-        navigate('/client')
+    
+    
+    const login = (e)=>{
+        e.preventDefault()
+      
+        setOpen(true)
+            navigate('/client')
+        
+       
     }
 
+    const handleChange =(e)=>{
+          setUsername(e.target.value)
+    }
+
+    const handleChange1 =(e)=>{
+       
+        setPassword(e.target.value)
+    }
     return(
         <PageContainer>
                 <LoginContainer>
                 <h1> Afflatus </h1>
                         <LoginPanel>
+                        
                                 <form>
-                                    <StyledInput1 placeholder='usuario' type='text' required ></StyledInput1>
-                                    <StyledInput1 placeholder='senha' type= 'password' required></StyledInput1>
-                                    <button type='submit'onClick={()=>{login()}}> Log In</button>
+                                    <StyledInput1 
+                                         value={username} 
+                                         onChange={(e)=>handleChange(e)} 
+                                         required
+                                         placeholder='usuario'
+                                         type='text'  
+                                    ></StyledInput1>
+                                    <StyledInput1 
+                                         value= {password}
+                                         onChange={(e)=>handleChange1(e)}
+                                         required
+                                         placeholder='senha'
+                                         type= 'password' 
+                                    ></StyledInput1>
+                                    <button 
+                                        type='submit' 
+                                        onClick={(e)=>{login(e)}}
+                                    > Log In
+                                    </button>
+                                 
                                 </form>
+                             
                         </LoginPanel>
                         <h1> Assistant </h1>
                 </LoginContainer>

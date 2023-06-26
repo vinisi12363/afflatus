@@ -23,8 +23,18 @@ export default function RegisterComponent(){
 
                 <StyledInput1 placeholder="Nome do bebê"/>
                 <BirthDateInput type="date"></BirthDateInput>
-
-                
+                <BsPlusSquare onClick={()=>{ <StyledInput1 placeholder="Nome do bebê"/> }}
+                 style={{
+                            hover: "pointer", 
+                            width:"150px",
+                            height:"150px",
+                            color:"#000",
+                            position:"relative",
+                            bottom:"25px",
+                            left:'180px'
+                        
+                        }}
+                ></BsPlusSquare> 
                 <StyledInput1 placeholder="Data especial (Batismo, primeiros passos etc)"/>
                 <BirthDateInput type="date"></BirthDateInput>
                 
