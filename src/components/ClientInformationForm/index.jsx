@@ -21,19 +21,21 @@ import { ErrorMsg } from './ErrorMsg';
 import { ufList } from './ufList';
 import FormValidations from './FormValidations';
 import { Title } from '../Title/Title';
-
+import  NavigationBar  from '../Dashboard/NavigationBar/index.jsx';
+import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
+import { PageContainer } from '../PageContainers/PageContainer.jsx';
 dayjs.extend(CustomParseFormat);
 
 export default function ClientInformationForm() {
   const [dynamicInputIsLoading, setDynamicInputIsLoading] = useState(false);
   const { getCep } = useCep();
- // const { enrollment } = useEnrollment();
- // const { saveEnrollmentLoading, saveEnrollment } = useSaveEnrollment();
+  const [disabledButton , setDisabledButton] = useState(false);
 
   const { handleSubmit, handleChange, data, errors, setData, customHandleChange } = useForm({
     validations: FormValidations,
   
     onSubmit: async(data) => {
+      setDisabledButton(true);
       const newData = {
         name: data.name,
         cpf: data.cpf.replaceAll('.', '').replaceAll('-', ''),
@@ -52,9 +54,9 @@ export default function ClientInformationForm() {
 
       try {
         //await saveEnrollment(newData);
-        toast('Informações salvas com sucesso!');
+        toast.success('Informações salvas com sucesso!');
       } catch (err) {
-        toast('Não foi possível salvar suas informações!');
+        toast.error('Não foi possível salvar suas informações!');
       }
     },
 
@@ -73,23 +75,6 @@ export default function ClientInformationForm() {
     },
   });
 
-  /*useEffect(() => {
-    if (enrollment) {
-      setData({
-        name: enrollment.name,
-        cpf: enrollment.cpf,
-        birthday: enrollment.birthday,
-        phone: enrollment.phone,
-        cep: enrollment.address.cep,
-        street: enrollment.address.street,
-        city: enrollment.address.city,
-        number: enrollment.address.number,
-        state: enrollment.address.state,
-        neighborhood: enrollment.address.neighborhood,
-        addressDetail: enrollment.address.addressDetail,
-      });
-    }
-  }, [enrollment]);*/
 
   function isValidCep(cep) {
     return cep.length === 8;
@@ -121,10 +106,10 @@ export default function ClientInformationForm() {
   }
 
   return (
-    <>
+    <PageContainer>
+      <SystemContainer>
        <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Title title="Suas Informações" />
-     
+        <NavigationBar></NavigationBar>
         <FormWrapper onSubmit={handleSubmit}>
           <InputWrapper>
             <Input
@@ -234,13 +219,14 @@ export default function ClientInformationForm() {
           </InputWrapper>
 
           <SubmitContainer>
-            <MyButton type="submit" disabled={dynamicInputIsLoading ||/*saveEnrollmentLoading*/ ''}>
+            <MyButton type="submit" disabled={disabledButton}>
               Salvar
             </MyButton>
           </SubmitContainer>
         </FormWrapper>
         </LocalizationProvider>
-    </>
+        </SystemContainer> 
+    </PageContainer>
   );
 }
 

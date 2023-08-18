@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import {BiUserPlus} from 'react-icons/bi'
-import {MdPersonSearch} from 'react-icons/md'
 import React, { useState } from "react";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
 import NavigationBar from "../NavigationBar/index.jsx";
+import { PageContainer } from "../../PageContainers/PageContainer.jsx";
+import { SystemContainer } from "../../PageContainers/SystemContainer.jsx";
+import { Title } from "../../Title/Title.jsx";
 
 export default function ClientBody (){
     const navigate = useNavigate()
@@ -16,67 +16,59 @@ export default function ClientBody (){
       };
       console.log(selectedDate)
     return (
+            <PageContainer>
+                    <SystemContainer>
+                        <NavigationBar></NavigationBar>
+                        
+                    <ListClientsArea>
+                      <Title title={"Lembretes"}></Title>
+                        <Card>
+                                    <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
+                                    <p>  Aniversário: 01/01 </p>
+                                        <p>Aniversário do filho: 31/12 </p>
+                                        <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
+                                        
+                        </Card>
+            
+                        <ListClientsBox>
+                                    <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
+                                    <p>  Aniversário: 01/01 </p>
+                                        <p>Aniversário do filho: 31/12 </p>
+                                        <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
+                                        
+                        </ListClientsBox>
+                        
+                            
+                        <ListClientsBox>
+                                    <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
+                                    <p>  Aniversário: 01/01 </p>
+                                        <p>Aniversário do filho: 31/12 </p>
+                                        <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
+                                        
+                        </ListClientsBox>
+                        
+                            
+                        <ListClientsBox>
+                                    <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
+                                    <p>  Aniversário: 01/01 </p>
+                                        <p>Aniversário do filho: 31/12 </p>
+                                        <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
+                                        
+                        </ListClientsBox>
+                        
+                            
+                        <ListClientsBox>
+                                    <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
+                                    <p>  Aniversário: 01/01 </p>
+                                        <p>Aniversário do filho: 31/12 </p>
+                                        <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
+                                        
+                        </ListClientsBox>
+                        
 
-                <ClientPanel>
-                    <NavigationBar></NavigationBar>
-                   <ListClientsArea>
-                        <h1>Lembretes</h1>
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                     <Card variant="outlined"> 
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                       </Card>
-                           
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                       
-                           
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                       
-                           
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                       
-                           
-                     <ListClientsBox>
-                                <p> Fulana  da silva , Mãe do(a): Beltrano Junior  da silva ,  </p>
-                                   <p>  Aniversário: 01/01 </p>
-                                    <p>Aniversário do filho: 31/12 </p>
-                                    <p>Datas especiais: 08/01 (Batismo) ,  09/12 (primeiros passos)</p>
-                                    
-                     </ListClientsBox>
-                       
-
-                    </ListClientsArea>
-                </ClientPanel>
-
+                        </ListClientsArea>
+                    </SystemContainer>
+                </PageContainer>
     )
 
 
@@ -111,7 +103,7 @@ const ClientBoxArea = styled.div`
 `
 const ListClientsArea = styled.div `
     overflow-y:scroll;
-    width:80%;
+    width:100%;
     background-image:  url("https://www.verywellfamily.com/thmb/XNQPqjgDTmu9RB9zdm6tebjF3hM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-482136905-2-574320f63df78c6bb016da13.jpg"); 
             background-repeat:no-repeat;
             background-size:cover;

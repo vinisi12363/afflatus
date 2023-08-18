@@ -21,12 +21,12 @@ export default function NavigationBar() {
 
   return (
     <Container>
-       
-        <NavigationButton active={isActive('/dashboard/client')}>
-          <FaRegCalendarAlt />
-          <span>Agendamentos</span>
-        </NavigationButton>
-      
+        <Link to="/dashboard/client">
+          <NavigationButton active={isActive('/dashboard/client')}>
+            <FaRegCalendarAlt />
+            <span>Datas</span>
+          </NavigationButton>
+        </Link>
 
       <Link to="/dashboard/register">
         <NavigationButton active={isActive('/dashboard/register')}>
