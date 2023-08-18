@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import * as React from 'react';
 import { useState } from 'react';
 import e from 'cors';
+import { toast } from 'react-toastify';
+
 
 export default function LoginBody(){
     const [open, setOpen] = useState(false)
@@ -11,11 +13,11 @@ export default function LoginBody(){
     const navigate = useNavigate()
     
     
-    const login = (e)=>{
-        e.preventDefault()
-      
-        setOpen(true)
-            navigate('/client')
+    const login = (e) => {
+        e.preventDefault();
+        toast.success("login efetuado com sucesso!");
+        setOpen(true);
+        navigate('/dashboard/client');
         
        
     }
@@ -29,35 +31,36 @@ export default function LoginBody(){
     }
     return(
         <PageContainer>
-                <LoginContainer>
-                <h1> Afflatus </h1>
-                        <LoginPanel>
+                  <LoginPanel>
                         
-                                <form>
-                                    <StyledInput1 
-                                         value={username} 
-                                         onChange={(e)=>handleChange(e)} 
-                                         required
-                                         placeholder='usuario'
-                                         type='text'  
-                                    ></StyledInput1>
-                                    <StyledInput1 
-                                         value= {password}
-                                         onChange={(e)=>handleChange1(e)}
-                                         required
-                                         placeholder='senha'
-                                         type= 'password' 
-                                    ></StyledInput1>
-                                    <button 
-                                        type='submit' 
-                                        onClick={(e)=>{login(e)}}
-                                    > Log In
-                                    </button>
-                                 
-                                </form>
-                             
-                        </LoginPanel>
-                        <h1> Assistant </h1>
+                        <form>
+                            <StyledInput1 
+                                 value={username} 
+                                 onChange={(e)=>handleChange(e)} 
+                                 required
+                                 placeholder='usuario'
+                                 type='text'  
+                            ></StyledInput1>
+                            <StyledInput1 
+                                 value= {password}
+                                 onChange={(e)=>handleChange1(e)}
+                                 required
+                                 placeholder='senha'
+                                 type= 'password' 
+                            ></StyledInput1>
+                            <button 
+                                type='submit' 
+                                onClick={(e)=>{login(e)}}
+                            > Entrar
+                            </button>
+                         
+                        </form>
+                     
+                </LoginPanel>
+                <LoginContainer>
+               
+                      
+                       
                 </LoginContainer>
              
         </PageContainer>
@@ -69,17 +72,18 @@ export default function LoginBody(){
 
 const LoginPanel = styled.div`
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+    justify-content:center;
 
     form{
         align-items:center;
-        background-color:sandybrown;
+        background:linear-gradient(to right, #f4c095, #FFD77F);
         border:3px black solid;
         border-radius:5px;
         display:flex;
         flex-direction: column;
-        height:60dvh;
-        width:400px;
+        width:400px; 
+        height:520px;
 
         button{
             margin-top:20px;
@@ -112,26 +116,23 @@ const StyledInput1= styled.input`
 const PageContainer  = styled.div`
     width:100%;
     min-height:100dvh;
-    background-color: black;
+    display:flex;
+    flex-direction:column;
     align-items: center;
-    
+    justify-content:center;
+    background-image: url("https://www.verywellfamily.com/thmb/XNQPqjgDTmu9RB9zdm6tebjF3hM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-482136905-2-574320f63df78c6bb016da13.jpg"); 
+    background-repeat:no-repeat;
+    background-size:cover;
 `
 
 const LoginContainer = styled.div `
-
-
-  
     display:flex;
     flex-direction:column;
-    
  
     h1{
         font-size:60px;
         color:black;
     }
-    background-image: url("https://www.verywellfamily.com/thmb/XNQPqjgDTmu9RB9zdm6tebjF3hM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-482136905-2-574320f63df78c6bb016da13.jpg"); 
-    background-repeat:no-repeat;
-    background-size:cover;
-   
-`
+  
+`;
 

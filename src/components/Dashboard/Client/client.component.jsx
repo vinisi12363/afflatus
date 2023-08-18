@@ -6,7 +6,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@mui/material";
-
+import NavigationBar from "../NavigationBar/index.jsx";
 
 export default function ClientBody (){
     const navigate = useNavigate()
@@ -18,30 +18,7 @@ export default function ClientBody (){
     return (
 
                 <ClientPanel>
-                    <ClientBoxArea>
-                        <h1>Menu</h1>
-                        <BiUserPlus onClick={()=>{navigate('/register')}} style={{
-                            hover: "hand", 
-                            width:"150px",
-                            height:"150px",
-                            color:"#000",
-                        }}/>
-                       
-
-                        <MdPersonSearch  onClick={()=>{navigate('/search')}} style={{
-                            width:"150px",
-                            height:"150px",
-                            color:"#000",
-                        }}/>
-                         <CalendarBox>
-                    
-                             <Calendar onChange={handleDateChange} value={selectedDate} />
-                         </CalendarBox>
-
-                    </ClientBoxArea>
-                  
-                   
-                     
+                    <NavigationBar></NavigationBar>
                    <ListClientsArea>
                         <h1>Lembretes</h1>
                      <ListClientsBox>
@@ -127,8 +104,8 @@ const ClientBoxArea = styled.div`
     align-items:center;
     display : flex;
     flex-direction: column;
-    height:100dvh;
-    width:400px;
+    height:100%;
+    min-width:100%;
     background-color:sandybrown;
 
 `

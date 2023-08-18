@@ -1,4 +1,4 @@
-import SearchComponent from "../components/search.component.jsx";
+import SearchComponent from "../../../components/Dashboard/Search/search.component.jsx";
 
 
 export default function SearchPage(){
