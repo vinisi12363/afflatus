@@ -10,21 +10,21 @@ import useCep from '../../hooks/hooks/api/useCep.jsx';
 import  useSaveCustomer from '../../hooks/hooks/api/useSaveCustomer.jsx';
 import { useForm } from '../../hooks/hooks/useForm.jsx';
 import { CustomDatePicker } from './CustomDatePicker.jsx';
-import Input from '../Form/Input';
-import MyButton from '../Form/Button';
-import Select from '../../components/Form/Select';
-import { FormWrapper } from './FormWrapper';
-import { InputWrapper } from './InputWrapper';
-import { ErrorMsg } from './ErrorMsg';
-import { ufList } from './ufList';
-import FormValidations from './FormValidations';
+import Input from '../Form/Input.jsx';
+import MyButton from '../Form/Button.jsx';
+import Select from '../Form/Select.jsx';
+import { FormWrapper } from './FormWrapper.jsx';
+import { InputWrapper } from './InputWrapper.jsx';
+import { ErrorMsg } from './ErrorMsg.jsx';
+import { ufList } from './ufList.jsx';
+import FormValidations from './FormValidations.jsx';
 import  NavigationBar  from '../Dashboard/NavigationBar/index.jsx';
 import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
 import { PageContainer } from '../PageContainers/PageContainer.jsx';
 
 dayjs.extend(CustomParseFormat);
 
-export default function ClientInformationForm() {
+export default function ChildForm() {
   const [dynamicInputIsLoading, setDynamicInputIsLoading] = useState(false);
   const { getCep } = useCep();
   const { saveCustomer } = useSaveCustomer();
@@ -128,15 +128,13 @@ export default function ClientInformationForm() {
           </InputWrapper>
           <InputWrapper>
             <Input
-              name="cpf"
-              label="CPF"
+              label="Nome do Pai ou mãe"
+              name="customer_name"
               type="text"
-              maxLength="14"
-              mask="999.999.999-99"
-              value={data?.cpf || ''}
-              onChange={handleChange('cpf')}
+              value={data?.customer_name || ''}
+              onChange={handleChange('customer_name')}
             />
-            {errors.cpf && <ErrorMsg>{errors.cpf}</ErrorMsg>}
+            {errors.name && <ErrorMsg>{errors.name}</ErrorMsg>}
           </InputWrapper>
           <InputWrapper>
             <CustomDatePicker
@@ -155,29 +153,6 @@ export default function ClientInformationForm() {
             {errors.birthday && <ErrorMsg>{errors.birthday}</ErrorMsg>}
           </InputWrapper>
           <InputWrapper>
-            <Input
-              label="Telefone"
-              mask={data?.phone.length < 15 ? '(99) 9999-99999' : '(99) 99999-9999'} // o 9 extra no primeiro é para permitir digitar um número a mais e então passar pra outra máscara - gambiarra? temos
-              name="phone"
-              value={data?.phone || ''}
-              onChange={handleChange('phone')}
-            />
-            {errors.phone && <ErrorMsg>{errors.phone}</ErrorMsg>}
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              label="CEP"
-              name="cep"
-              mask="99999-999"
-              value={data?.cep || ''}
-              onChange={(e) => {
-                handleChange('cep')(e);
-                handleCepChanges(e);
-              }}
-            />
-            {errors.cep && <ErrorMsg>{errors.cep}</ErrorMsg>}
-          </InputWrapper>
-          <InputWrapper>
             <Select label="Estado" name="state" id="state" value={data?.state || ''} onChange={handleChange('state')}>
               <MenuItem value="">
                 <em>None</em>
@@ -190,59 +165,6 @@ export default function ClientInformationForm() {
             </Select>
             {errors.state && <ErrorMsg>{errors.state}</ErrorMsg>}
           </InputWrapper>
-
-          <InputWrapper>
-            <Input
-              label="Cidade"
-              name="city"
-              value={data?.city || ''}
-              onChange={handleChange('city')}
-              disabled={dynamicInputIsLoading}
-            />
-            {errors.city && <ErrorMsg>{errors.city}</ErrorMsg>}
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              label="Rua"
-              name="street"
-              value={data?.street || ''}
-              onChange={handleChange('street')}
-              disabled={dynamicInputIsLoading}
-            />
-            {errors.street && <ErrorMsg>{errors.street}</ErrorMsg>}
-          </InputWrapper>
-
-          <InputWrapper>
-            <Input label="Número" name="number" value={data?.number || ''} onChange={handleChange('number')} />
-            {errors.number && <ErrorMsg>{errors.number}</ErrorMsg>}
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              label="Bairro"
-              name="neighborhood"
-              value={data?.neighborhood || ''}
-              onChange={handleChange('neighborhood')}
-              disabled={dynamicInputIsLoading}
-            />
-            {errors.neighborhood && <ErrorMsg>{errors.neighborhood}</ErrorMsg>}
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              label="Complemento"
-              name="addressDetail"
-              value={data?.addressDetail || ''}
-              onChange={handleChange('addressDetail')}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              label="seu instagram"
-              name="instagram"
-              value={data?.instagram || ''}
-              onChange={handleChange('instagram')}
-            />
-          </InputWrapper>
-
           <SubmitContainer>
             <MyButton type="submit" disabled={disabledButton}>
               Salvar

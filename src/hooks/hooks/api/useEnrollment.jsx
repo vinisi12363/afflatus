@@ -1,16 +1,15 @@
 import useAsync from '../useAsync';
-import useToken from '../useToken';
-import * as enrollmentApi from '../../../services/enrollmentApi';
+import * as customersApi from '../../../services/customersApi';
 
 export default function useEnrollment() {
- // const token = useToken();
+ 
   
   const {
     data: enrollment,
     loading: enrollmentLoading,
     error: enrollmentError,
     act: getEnrollment
-  } = useAsync(() => enrollmentApi.getPersonalInformations(token));
+  } = useAsync(() => customersApi.getAllCustomers(), false);
 
   return {
     enrollment,

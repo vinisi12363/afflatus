@@ -24,7 +24,7 @@ export default function NavigationBar() {
         <Link to="/dashboard/client">
           <NavigationButton active={isActive('/dashboard/client')}>
             <FaRegCalendarAlt />
-            <span>Datas</span>
+            <span>Eventos</span>
           </NavigationButton>
         </Link>
 

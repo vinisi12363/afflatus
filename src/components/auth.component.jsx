@@ -4,6 +4,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import e from 'cors';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import {signIn} from '../services/authApi.jsx';
 
 
 export default function LoginBody(){
@@ -11,13 +13,24 @@ export default function LoginBody(){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    //const { setUserData } = useContext(UserContext);
     
     
-    const login = (e) => {
+    const login = async  (e) => {
         e.preventDefault();
-        toast.success("login efetuado com sucesso!");
-        setOpen(true);
-        navigate('/dashboard/client');
+        const link = import.meta.env.VITE_API_BASE_URL;
+        try {
+            const { data }= await signIn(username, password);
+            //const { data } = await axios.post(`${link}/signin`, {username:username, password:password});
+          //  setUserData({ data });
+            console.log(data);
+            toast.success("login efetuado com sucesso!");
+            setOpen(true);
+            navigate('/dashboard/client');
+        } catch (error) {
+            toast.error("usuario não cadastrado ou senha incorreta!");
+        }
+  
         
        
     }
