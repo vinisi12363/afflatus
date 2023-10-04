@@ -15,6 +15,6 @@ export async function saveCustomer(body) {
 }
 
 export async function getAllCustomers() {
-  const response = await api.get('/customers');
-  return response.data;
+  const { data } = await api.get('/customers');
+  return data;
 }

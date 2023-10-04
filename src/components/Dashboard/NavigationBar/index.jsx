@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
- 
-  FaMoneyBill,
+  
+  FaBaby,
   FaSearch,
   FaRegCalendarAlt,
   FaUserPlus
@@ -24,30 +24,29 @@ export default function NavigationBar() {
         <Link to="/dashboard/client">
           <NavigationButton active={isActive('/dashboard/client')}>
             <FaRegCalendarAlt />
-            <span>Eventos</span>
+            <p>Eventos</p>
           </NavigationButton>
         </Link>
 
       <Link to="/dashboard/register">
         <NavigationButton active={isActive('/dashboard/register')}>
           <FaUserPlus />
-          <span>Inscrição</span>
+          <p>cadastrar mamãe/papai</p>
+        </NavigationButton>
+      </Link>
+      
+      <Link to="/dashboard/child">
+        <NavigationButton active={isActive('/dashboard/child')}>
+          <FaBaby />
+          <p>cadastrar bebê</p>
         </NavigationButton>
       </Link>
       <Link to="/dashboard/search">
         <NavigationButton active={isActive('/dashboard/search')}>
           <FaSearch />
-          <span>Buscar</span>
+          <p>Buscar</p>
         </NavigationButton>
       </Link>
-
-      <Link to="/dashboard/client">
-        <NavigationButton active={isActive('/dashboard/client')}>
-          <FaMoneyBill />
-          <span>Pagamento</span>
-        </NavigationButton>
-      </Link>
-
      
 
       
@@ -63,7 +62,11 @@ const Container = styled.div`
   width: 100px;
   flex-shrink: 0;
   justify-content: flex-start;
-
+  p {
+    font-family: 'Roboto', sans-serif;  
+    font-weight:bold;
+    font-style:italic;
+  }
   > a {
     text-decoration: none;
   }
