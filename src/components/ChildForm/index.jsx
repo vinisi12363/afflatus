@@ -21,6 +21,7 @@ import FormValidations from './FormValidations.jsx';
 import  NavigationBar  from '../Dashboard/NavigationBar/index.jsx';
 import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
 import { PageContainer } from '../PageContainers/PageContainer.jsx';
+import { InputSpecialDateWrapper } from './SpecialDateWrapper.jsx';
 
 dayjs.extend(CustomParseFormat);
 
@@ -51,7 +52,7 @@ export default function ChildForm() {
     
    
     onSubmit: async(data) => {
-      console.log("data do formulário", data);
+     
       const customer_id = parentsData.find((parent) => parent.name === data.parentName).id;
       setDisabledButton(true);
       const newData = {
@@ -119,6 +120,7 @@ export default function ChildForm() {
             />
             {errors.birthday && <ErrorMsg>{errors.birthday}</ErrorMsg>}
           </InputWrapper>
+            
           <SubmitContainer>
             <MyButton type="submit" disabled={disabledButton}>
               Salvar
@@ -126,6 +128,8 @@ export default function ChildForm() {
           </SubmitContainer>
         </FormWrapper>
         </LocalizationProvider>
+        <p onClick={()=>{alert('clicado!')}}>gostaria de inserir uma data especial do seu bebê ? clique aqui</p>
+        
         </SystemContainer> 
     </PageContainer>
   );
