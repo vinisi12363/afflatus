@@ -87,26 +87,36 @@ const LoginPanel = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:center;
-
+ 
     form{
+        padding:50px;
         align-items:center;
-        background:linear-gradient(to right, #f4c095, #FFD77F);
-        border:3px black solid;
+        
+        -webkit-backdrop-filter: saturate(180%) blur(5px);
+        backdrop-filter: saturate(180%) blur(5px);
+        background: hsla(0, 0%, 100%, 0.8);
+        border:1px #fff solid;
         border-radius:5px;
         display:flex;
         flex-direction: column;
         width:400px; 
-        height:520px;
+     
 
         button{
             margin-top:20px;
             width:150px;
             height:50px;
             font-size:20px;
-            border:3px solid;
-            color:white;
-            background:#333333;
+            border:1px #fff  solid;
+            color:black;
+            background: linear-gradient(to right, rgb(255,255,255), rgb(254, 202, 202), rgb(254, 249, 195));
+            border-radius:5px;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+           :hover{
+               filter: saturate(300%);
 
+           }
            
         }
     }
@@ -118,11 +128,13 @@ const StyledInput1= styled.input`
     margin-top:30px;
     width:300px;
     height:60px;
-    border: 3px solid black;
+    border: 1px #fff solid;
     border-radius:5px;
+    font-family: 'Roboto', sans-serif;
+    background:#fff;
     text-align: center;
     font-size:25px;
-    background-color:#dbdbdb;
+    
 
 `
 

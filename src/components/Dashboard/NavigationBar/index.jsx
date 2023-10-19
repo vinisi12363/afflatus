@@ -59,7 +59,7 @@ const Container = styled.div`
   flex-direction: column;
   background-color: #ddd;
   box-shadow: 2px 0 10px 0 rgba(0,0,0,0.1);
-  width: 100px;
+  width: 15%;
   flex-shrink: 0;
   justify-content: flex-start;
   p {

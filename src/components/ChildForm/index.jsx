@@ -22,6 +22,7 @@ import  NavigationBar  from '../Dashboard/NavigationBar/index.jsx';
 import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
 import { PageContainer } from '../PageContainers/PageContainer.jsx';
 import { InputSpecialDateWrapper } from './SpecialDateWrapper.jsx';
+import { SpecialDateAreaComponent } from './SpecialDateArea.jsx';
 
 dayjs.extend(CustomParseFormat);
 
@@ -29,6 +30,7 @@ export default function ChildForm() {
   const { getParents } = useParents();
   const [disabledButton , setDisabledButton] = useState(false);
   const [parentsData, setParentsData] = useState([]);
+  const [specialClick, setSpecialClick] = useState(false);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +80,10 @@ export default function ChildForm() {
       parentName: '',
     },
   });
-
+   const setClick = ()=>{
+      setSpecialClick(true);
+   }
+  
   return (
     <PageContainer>
       <SystemContainer>
@@ -128,8 +133,8 @@ export default function ChildForm() {
           </SubmitContainer>
         </FormWrapper>
         </LocalizationProvider>
-        <p onClick={()=>{alert('clicado!')}}>gostaria de inserir uma data especial do seu bebê ? clique aqui</p>
-        
+        <p onClick={()=>{setClick()}}>gostaria de inserir uma data especial do seu bebê ? clique aqui</p>
+        {specialClick && <SpecialDateAreaComponent></SpecialDateAreaComponent>}
         </SystemContainer> 
     </PageContainer>
   );

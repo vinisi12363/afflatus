@@ -9,12 +9,15 @@ export default function NavigationButton({ active, children }) {
 }
 
 const Button = styled.button`
-  width: 100%;
-  height: 100px;
+  width:100%;
+  height: 130px;
   border: none;
   background-color: transparent;
   cursor: pointer;
-
+  p{
+      font-style:normal;
+   
+  }
   display: flex;
   justify-content: center;
   align-items: center;
