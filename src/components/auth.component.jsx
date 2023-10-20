@@ -23,7 +23,7 @@ export default function LoginBody(){
             const { data }= await signIn(username, password);
             //const { data } = await axios.post(`${link}/signin`, {username:username, password:password});
           //  setUserData({ data });
-            console.log(data);
+            
             toast.success("login efetuado com sucesso!");
             setOpen(true);
             navigate('/dashboard/client');

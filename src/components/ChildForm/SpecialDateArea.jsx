@@ -4,97 +4,214 @@ import { CustomDatePicker } from "./CustomDatePicker";
 import { InputWrapper } from "./InputWrapper";
 import MyButton from '../Form/Button.jsx';
 import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Input from "../Form/Input";
-import { ErrorMsg } from './ErrorMsg.jsx';
 import CustomParseFormat from 'dayjs/plugin/customParseFormat';
-import { useForm } from "../../hooks/hooks/useForm";
-
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { getAllChildrens } from "../../services/childsApi";
+import { useEffect } from "react";
+import { saveEvent } from "../../services/eventsApi";
 dayjs.extend(CustomParseFormat);
 
 
-export function SpecialDateAreaComponent(){
-  
-    function handleChange(description) {
-        data.description = description;
+export function SpecialDateAreaComponent(specialClick ,setSpecialClick){
+    const [childrens , setChildrens] = useState([]);
+    const [closed, setClosed] = useState(false);
+    const [data , setData] = useState({description:'', specialDate:null, child_id:2});
+
+    useEffect(()=>{
+      const fetchData = async () => {
+        try {
+          const result = await getAllChildrens();
+          
+          const childrens = result.rows.map((child) => ({
+            name: child.name,
+            id: child.id,
+          }));
+        
+          setChildrens(childrens);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetchData();
+
+
+    },[]);
+    
+    function handleChange(text) {
+      
+        setData({description: text, specialDate: data.specialDate , child_id: data.child_id  })
+       
     }
     function customHandleChange(specialDate) {
-        data.specialDate = specialDate;
+      setData({specialDate: specialDate,  description: data.description , child_id: data.child_id});
     }
-    function saveSpecialData(){
-        alert('salvo');
+    function selectHandleChange(selectedChild) {
+      console.log(selectedChild);
+      setData({specialDate: data.specialDate,  description: data.description, child_id: selectedChild});
     }
    
-    const { handleSubmit, data, errors } = useForm({
-  
-        onSubmit: async(data) => {
-         
-          const customer_id = parentsData.find((parent) => parent.name === data.parentName).id;
-          setDisabledButton(true);
-          const newData = {
-            name: data.name,
-            birthday: dayjs(data.birthday).toISOString(),
-            customer_id: customer_id,
-          };
-          
-          try {
-            console.log(newData);
-           const { data } = await saveChild(newData);
-           console.log(data);
-           toast.success('Informações salvas com sucesso!');
-          } catch (err) {
-           console.log(err);
-           toast.error('Não foi possível salvar suas informações!');
-          }
-        },
-    
-        initialValues: {
-          name: '',
-          birthday: null,
-          parentName: '',
-        },
-      });
+    function fecharJanela() {
+      setClosed(true);
+      window.location.reload();
+    }
+    const salvar  = async(event) => {
+        event.preventDefault();
+      //      setDisabledButton(true);
+      const newData = {
+        child_id: data.child_id,
+        special_date: dayjs(data.specialDate).toISOString(),
+        description: data.description,
+      };
+      
+      try {
+        console.log(newData);
+       const { data } = await saveEvent(newData);
+       
+       toast.success('Informações salvas com sucesso!');
+      } catch (err) {
+       console.log(err);
+       toast.error('Não foi possível salvar suas informações!');
+      }
+    }
     return(
-        <SpecialDateArea>
-            <FormWrapper onSubmit={()=>saveSpecialData()}>
-                <InputWrapper>
-                <Input type="text"
-                 placeholder="description"
-                  name = 'description' 
-                  value={data?.description || ''} 
-                  onChange={()=>{handleChange('description')}}
-                  />
-                </InputWrapper>
-                    
-                <InputWrapper>
-                <Input type="date"
-                 name = 'specialDate' 
-                 format="DD-MM-YYYY"
-              label="Data de Nascimento"
-              inputVariant="outlined"
-                 value={data?.specialDate || ''} 
-                 onChange={()=>{customHandleChange('specialDate')}}
-                ></Input>
-                </InputWrapper>
+      <>
+            { specialClick.specialClick && <SpecialDateArea visibility = {closed}>
+            <button className='btnFechar'onClick={()=>{fecharJanela()}}>fechar</button>
+            <h2> primeiro selecione o nome do seu bebê:</h2>
+            <form onSubmit={(event)=>salvar(event) }>
                
-                <SubmitContainer>
-                    <MyButton type="submit">Salvar</MyButton>
-                </SubmitContainer>
-            </FormWrapper>
-        </SpecialDateArea>
+                <select 
+                  type="select"  
+                  className="selectBaby" 
+                  label='nome do bebê' 
+                  value={data?.child_id || null} 
+                  onChange={(e)=>{selectHandleChange(e.target.value)}}
+                >
+                    {childrens.map((child) => {
+                      return <option key={child.id} value={child.id}>{child.name}</option>;
+                    })}
+
+                </select>
+                <input className="descriptionInput" type="text"
+                  name = {data.description}
+                  placeholder="Descrição do que aconteceu na data especial"
+                  value={data?.description || ''} 
+                  onChange={(e)=>{handleChange(e.target.value)}}
+                  />
+                
+                <input className="dateInput"
+                 type="date"
+                 name = {data.specialDate} 
+                 format="DD-MM-AAAA"
+                 value={data?.specialDate || ''} 
+                 onChange={(e)=>{customHandleChange(e.target.value)}}
+                ></input>
+                    <button className='btnSalvar'type="submit">Salvar</button>
+              
+            </form>
+         </SpecialDateArea> 
+      }
+      
+      </>
     
-    )
+        )
 }
 export const SpecialDateArea = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #ebebeb;
+    
     width: 50dvh;
     height: 50dvh;
+    box-sizing: border-box;
+    padding-top:8px;
+    position:absolute;
+    top: 30dvh;
+    left:100dvh;
+    display: ${(props) => (!props.visibility ? "flex" : "none")};
     z-index: 1;
     border-radius: 10px;
+    border:5px #fff solid;
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    backdrop-filter: saturate(100%) blur(5px);
+    background: hsla(1, 70%, 90%, 0.5);
+
+
+    h2{
+      font-family: 'Roboto', sans-serif;
+      font-weight: lighter;
+      margin-left:10%;
+    }
+    .btnFechar{
+        position:relative;
+        left:75%;
+        background: #FCCF85;
+        max-width: 100px;
+        height: 40px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+        :hover{cursor: pointer;}
+    }
+    form{
+      display:flex;
+      flex-direction:column;
+      width:80%;
+      align-items:start;
+      button{
+        margin-top:10px;
+      }
+      .selectBaby{
+        position:relative;
+        left:10%;
+        padding:6px;
+        margin-left:5px;
+        font-family: 'Roboto', sans-serif;
+        min-height:50px;
+        width:105%;
+        text-align:center;
+        border-radius:5px;
+        margin-top:5px;
+      }
+      .descriptionInput{
+        position:relative;
+        left:10%;
+        padding:6px;
+        margin-left:5px;
+        font-family: 'Roboto', sans-serif;
+        min-height:50px;
+        width:100%;
+        text-align:center;
+        border-radius:5px;
+        margin-top:5px;
+      }
+      .dateInput{
+        position:relative;
+        left:10%;
+        font-family: 'Roboto', sans-serif;
+        height:40px;
+        padding:6px;
+        margin-left:5px;
+        width:100%;
+        text-align:center;
+        border-radius:5px;
+        margin-top:5px;
+      }
+      .btnSalvar{
+        position:relative;
+        left:50%;
+        background: #FCCF85;
+        min-width: 100px;
+        height: 40px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+        :hover{cursor: pointer;}
+      }
+
+    }
 `
 const SubmitContainer = styled.div`
   margin-top: 40px !important;

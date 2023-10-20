@@ -36,8 +36,7 @@ export default function ChildForm() {
     const fetchData = async () => {
       try {
         const result = await getParents();
-        console.log(result);
-         const parents = result.map((parent) => ({
+          const parents = result.map((parent) => ({
           name: parent.name,
           id: parent.id,
          }));
@@ -66,7 +65,7 @@ export default function ChildForm() {
       try {
         console.log(newData);
        const { data } = await saveChild(newData);
-       console.log(data);
+      
        toast.success('Informações salvas com sucesso!');
       } catch (err) {
        console.log(err);
@@ -101,7 +100,10 @@ export default function ChildForm() {
             {errors.name && <ErrorMsg>{errors.name}</ErrorMsg>}
           </InputWrapper>
           <InputWrapper>
-            <Select label="nome do pai / mãe" name="parentName" id="parentName" value={data?.parentName || ''} onChange={handleChange('parentName')}>s
+            <Select
+             label="nome do pai / mãe" 
+             name="parentName" id="parentName" 
+             value={data?.parentName || ''} onChange={handleChange('parentName')}>s
               {parentsData.map((p) => (
                 <MenuItem value={p.name} key={p.id}>
                   <em>{p.name}</em>
@@ -133,13 +135,19 @@ export default function ChildForm() {
           </SubmitContainer>
         </FormWrapper>
         </LocalizationProvider>
-        <p onClick={()=>{setClick()}}>gostaria de inserir uma data especial do seu bebê ? clique aqui</p>
-        {specialClick && <SpecialDateAreaComponent></SpecialDateAreaComponent>}
+        <StyledP onClick={()=>{setClick()}}>Gostaria de guardar uma data especial do bebê? clique aqui</StyledP>
+        {specialClick && <SpecialDateAreaComponent  specialClick={specialClick} setSpecialClick={setSpecialClick}></SpecialDateAreaComponent>}
         </SystemContainer> 
     </PageContainer>
   );
 }
+const StyledP = styled.p`
+  font-family: 'Roboto', sans-serif;
+  :hover{
+    cursor: pointer;
+  }
 
+`
 const SubmitContainer = styled.div`
   margin-top: 40px !important;
   width: 100% !important;

@@ -28,7 +28,7 @@ export default function ClientBody (){
            promise.data.forEach(element => {
                 element.birthday = formatarData(element.birthday);
                 element.child_birthday = formatarData(element.child_birthday);
-                element.specialDate?  formatarData(element.specialDate) : null;
+                element.special_date =   formatarData(element.special_date);
            });
            
             setClientsList(promise.data);
@@ -59,13 +59,17 @@ export default function ClientBody (){
                             <p  className="bday">  {client.birthday} </p>
                             <p  className="childName"> {client.child_name}</p>
                             <p  className="childBday"> {client.child_birthday} </p>
-                            {client.description && <p className="description"> {client.description}</p>}
-                            {client.specialDate && <p className="speciaDate"> {client.specialDate}</p>} 
+                            {client.description && <>
+                              <p className="description"> {client.description}</p>
+                              <p className="speciaDate"> {client.special_date}</p>
+                            </> 
+                            }
+                            
                         </ListClientsBox>
                     ))}
                      
 
-                </ListClientsArea>
+                        </ListClientsArea>
 
                     </SystemContainer>
                 </PageContainer>
