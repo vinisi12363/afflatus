@@ -48,3 +48,12 @@ Esse é o sistema, caso você não queira baixar:
 
 ![Screenshot do Sistema](screendashboard.png)
 
+
+### Próximos passos: ###
+1- implementação da página de busca avançada com a biblioteca MUI. (em desenvolvimento). 
+
+2- implementação do módulo de produtos.
+
+3- sistema de emissão de relatórios.
+
+4- sistema de emissão de pagamentos e NF-e.
