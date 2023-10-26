@@ -12,6 +12,9 @@ Ainda está em fase de desenvolvimento, porém sua estrutura é bem componentiza
 
 Sinta-se à vontade para dar uma olhada na construção do código.
 
+**Ou se preferir acessar o deploy , clique aqui:** https://main--bejewelled-ganache-05f7de.netlify.app/
+
+**user: vini password:123456**
 
 **Observação importante:** Você irá precisar do repositório backend para executar a aplicação.
 
