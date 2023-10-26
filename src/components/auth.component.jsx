@@ -18,7 +18,7 @@ export default function LoginBody(){
     
     const login = async  (e) => {
         e.preventDefault();
-        const link = import.meta.env.VITE_API_BASE_URL;
+        const link = import.meta.env.VITE_APP_API_URL;
         try {
             const { data }= await signIn(username, password);
             //const { data } = await axios.post(`${link}/signin`, {username:username, password:password});
