@@ -10,10 +10,15 @@ import { Title } from "../../Title/Title.jsx";
 import axios from 'axios';
 import { useEffect } from "react";
 import { getAllEvents } from "../../../services/eventsApi.jsx";
+import { CardLoader } from "../../CardLoader/CardLoader.jsx"; 
+import { toast } from "react-toastify";
+
+
 export default function ClientBody (){
     const navigate = useNavigate()
     const [clientsList , setClientsList] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [eventsLoaded, setEventsLoaded] = useState(false);
     const handleDateChange = (date) => {
         setSelectedDate(date);
       };
@@ -22,9 +27,10 @@ export default function ClientBody (){
         fetchClients();
     },[]);
     const fetchClients = async ()=>{
+      setEventsLoaded(false);
         try {
             const promise = await getAllEvents();
-            console.log('Promise no front',promise);
+           
            promise.data.forEach(element => {
                 element.birthday = formatarData(element.birthday);
                 element.child_birthday = formatarData(element.child_birthday);
@@ -32,7 +38,10 @@ export default function ClientBody (){
            });
            
             setClientsList(promise.data);
+            setEventsLoaded(true);
         } catch (error) {
+          setEventsLoaded(false);
+          toast.error("Desculpe, ocorreu um erro ao carregar os clientes cadastrados");
             console.log(error);
             throw error;
         }
@@ -50,26 +59,26 @@ export default function ClientBody (){
             <PageContainer>
                     <SystemContainer>
                         <NavigationBar></NavigationBar>
-                        
-                        <ListClientsArea>
+                       {!eventsLoaded?<CardLoader></CardLoader>: <ListClientsArea>
     
-                    {clientsList.map((client) => (
-                        <ListClientsBox key={client.id}>
-                            <p className="parentName">  {client.name} </p>
-                            <p  className="bday">  {client.birthday} </p>
-                            <p  className="childName"> {client.child_name}</p>
-                            <p  className="childBday"> {client.child_birthday} </p>
-                            {client.description && <>
-                              <p className="description"> {client.description}</p>
-                              <p className="speciaDate"> {client.special_date}</p>
-                            </> 
-                            }
-                            
-                        </ListClientsBox>
-                    ))}
-                     
+    {clientsList.map((client) => (
+        <ListClientsBox key={client.id}>
+            <p className="parentName">  {client.name} </p>
+            <p  className="bday">  {client.birthday} </p>
+            <p  className="childName"> {client.child_name}</p>
+            <p  className="childBday"> {client.child_birthday} </p>
+            {client.description && <>
+              <p className="description"> {client.description}</p>
+              <p className="speciaDate"> {client.special_date}</p>
+            </> 
+            }
+            
+        </ListClientsBox>
+    ))}
+     
 
-                        </ListClientsArea>
+        </ListClientsArea>} 
+                       
 
                     </SystemContainer>
                 </PageContainer>

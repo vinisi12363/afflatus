@@ -21,6 +21,7 @@ import FormValidations from './FormValidations';
 import  NavigationBar  from '../Dashboard/NavigationBar/index.jsx';
 import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
 import { PageContainer } from '../PageContainers/PageContainer.jsx';
+import {ThreeDots} from 'react-loader-spinner';
 
 dayjs.extend(CustomParseFormat);
 
@@ -58,8 +59,10 @@ export default function ClientInformationForm() {
        const { data } = await saveCustomer(newData);
        console.log(data);
         toast.success('Informações salvas com sucesso!');
+        setDisabledButton(false);
       } catch (err) {
         console.log(err);
+        setDisabledButton(false);
         toast.error('Não foi possível salvar suas informações!');
       }
     },
@@ -245,7 +248,7 @@ export default function ClientInformationForm() {
 
           <SubmitContainer>
             <MyButton type="submit" disabled={disabledButton}>
-              Salvar
+              {!disabledButton? "Salvar" : <ThreeDots color="#FFF" ></ThreeDots>}
             </MyButton>
           </SubmitContainer>
         </FormWrapper>

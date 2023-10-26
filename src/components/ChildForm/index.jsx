@@ -23,6 +23,7 @@ import { SystemContainer } from '../PageContainers/SystemContainer.jsx';
 import { PageContainer } from '../PageContainers/PageContainer.jsx';
 import { InputSpecialDateWrapper } from './SpecialDateWrapper.jsx';
 import { SpecialDateAreaComponent } from './SpecialDateArea.jsx';
+import { ThreeDots } from 'react-loader-spinner';
 
 dayjs.extend(CustomParseFormat);
 
@@ -31,6 +32,7 @@ export default function ChildForm() {
   const [disabledButton , setDisabledButton] = useState(false);
   const [parentsData, setParentsData] = useState([]);
   const [specialClick, setSpecialClick] = useState(false);
+  
   
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +55,7 @@ export default function ChildForm() {
     
    
     onSubmit: async(data) => {
-     
+    
       const customer_id = parentsData.find((parent) => parent.name === data.parentName).id;
       setDisabledButton(true);
       const newData = {
@@ -65,11 +67,13 @@ export default function ChildForm() {
       try {
         console.log(newData);
        const { data } = await saveChild(newData);
+       setDisabledButton(false);
       
        toast.success('Informações salvas com sucesso!');
       } catch (err) {
        console.log(err);
        toast.error('Não foi possível salvar suas informações!');
+       setDisabledButton(false);
       }
     },
 
@@ -130,7 +134,7 @@ export default function ChildForm() {
             
           <SubmitContainer>
             <MyButton type="submit" disabled={disabledButton}>
-              Salvar
+              {!disabledButton? "Salvar": <ThreeDots color="#FFF"></ThreeDots>}
             </MyButton>
           </SubmitContainer>
         </FormWrapper>

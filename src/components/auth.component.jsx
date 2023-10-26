@@ -7,11 +7,14 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import {signIn} from '../services/authApi.jsx';
 
+import { ThreeDots } from 'react-loader-spinner';
+
 
 export default function LoginBody(){
     const [open, setOpen] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [btnClicked , setBtnClicked] = useState(false)
     const navigate = useNavigate()
     //const { setUserData } = useContext(UserContext);
     
@@ -19,6 +22,7 @@ export default function LoginBody(){
     const login = async  (e) => {
         e.preventDefault();
         const link = import.meta.env.VITE_APP_API_URL;
+        setBtnClicked(true);
         try {
             const { data }= await signIn(username, password);
             //const { data } = await axios.post(`${link}/signin`, {username:username, password:password});
@@ -26,8 +30,10 @@ export default function LoginBody(){
             
             toast.success("login efetuado com sucesso!");
             setOpen(true);
+            setBtnClicked(true);
             navigate('/dashboard/client');
         } catch (error) {
+            setBtnClicked(false);
             toast.error("usuario não cadastrado ou senha incorreta!");
         }
   
@@ -64,7 +70,8 @@ export default function LoginBody(){
                             <button 
                                 type='submit' 
                                 onClick={(e)=>{login(e)}}
-                            > Entrar
+                                disabled={btnClicked}
+                            > {!btnClicked?   "Entrar": <ThreeDots color={"#f4edce"} />}
                             </button>
                          
                         </form>
