@@ -52,7 +52,7 @@ export default function ClientInformationForm() {
         instagram: data.instagram.replace('@', ''),
         phone: data.phone.replace(/[^0-9]+/g, '').replace(/^(\d{2})(9?\d{4})(\d{4})$/, '($1) $2-$3'),
       };
-      const link = import.meta.env.VITE_API_BASE_URL;
+     
       try {
      
        const { data } = await saveCustomer(newData);
