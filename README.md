@@ -17,6 +17,19 @@ Sinta-se à vontade para dar uma olhada na construção do código.
 
 </br>
 
+### Tecnologias utilizadas:
+
+1- React Js.
+
+2- Javascript
+
+3- RestAPi with axios
+
+4- Styled-components
+
+5- Design Patterns
+
+
 ### Instalação:
 1- baixe esse repositório em sua máquina. 
 
